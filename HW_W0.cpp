@@ -29,11 +29,6 @@ int main(void) {
     insertValue(arr, 2, 55, &next_slot);
     printArray(arr, &next_slot);
 
-    // Insert next_slot ahead
-    insertValue(arr, 8, 77, &next_slot);
-    printArray(arr, &next_slot);
-
-    // 1 2 55 3 4 5 99 0 77  *VALUE AFTER ALL INSERT PERFORM
     deleteValue(arr, next_slot-1, &next_slot);
     printArray(arr, &next_slot);
 
@@ -55,20 +50,12 @@ void printArray(int *arr, int *next_slot) {
 }
 
 void insertValue(int *arr, int pos, int val, int *next_slot) {
-    if(pos < 0 || pos >= SIZE) return; // invalid position
+    if(pos < 0 || pos >= SIZE || pos > *next_slot) return; // invalid position
 
     // insert at the next slot
     if(pos == *next_slot) {
         arr[pos] = val;
         (*next_slot)++;
-        return;
-    }
-
-    // insert past the next slot
-    if(pos > *next_slot) {
-        for(int i=*next_slot; i<pos; i++) arr[i] = 0;
-        arr[pos] = val;
-        *next_slot = pos + 1;
         return;
     }
 
