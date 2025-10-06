@@ -27,7 +27,6 @@ int main(void) {
     deleteValue(arr, &next_slot);
     printArray(arr, &next_slot);
 
-
     return 0; //code success
 }
 
@@ -40,6 +39,11 @@ void printArray(int *arr, int *next_slot) {
 }
 
 void insertValue(int *arr, int *next_slot) {
+    if (*next_slot == SIZE) {
+        cout << "Array is full" << endl;
+        return;
+    }
+
     cout << "\n\nInserting Value" << endl;
     int pos, val;
     cout << "Enter value: ";
@@ -68,6 +72,11 @@ void insertValue(int *arr, int *next_slot) {
 }
 
 void deleteValue(int *arr, int *next_slot) {
+    if (*next_slot == 0) {
+        cout << "Array is empty" << endl;
+        return;
+    }
+
     cout << "\n\nDeleting Value" << endl;
     int pos;
     do {
