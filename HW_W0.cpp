@@ -8,8 +8,8 @@ using namespace std;
 
 // FUNCTION PROTOTYPES
 void printArray(int *arr, int *next_slot);
-void insertValue(int *arr, int pos, int val, int *next_slot);
-void deleteValue(int *arr, int pos, int *next_slot);
+void insertValue(int *arr, int *next_slot);
+void deleteValue(int *arr, int *next_slot);
 
 int main(void) {
 
@@ -21,22 +21,12 @@ int main(void) {
     cout<<"Original Value: "<<endl;
     printArray(arr, &next_slot);
 
-    // Insert at next pos
-    insertValue(arr, next_slot, 99, &next_slot);
+    insertValue(arr, &next_slot);
     printArray(arr, &next_slot);
 
-    // Insert in between
-    insertValue(arr, 2, 55, &next_slot);
+    deleteValue(arr, &next_slot);
     printArray(arr, &next_slot);
 
-    deleteValue(arr, next_slot-1, &next_slot);
-    printArray(arr, &next_slot);
-
-    deleteValue(arr, 4, &next_slot);
-    printArray(arr, &next_slot);
-
-    deleteValue(arr, SIZE, &next_slot);
-    printArray(arr, &next_slot);
 
     return 0; //code success
 }
@@ -49,8 +39,17 @@ void printArray(int *arr, int *next_slot) {
     cout << endl;
 }
 
-void insertValue(int *arr, int pos, int val, int *next_slot) {
-    if(pos < 0 || pos >= SIZE || pos > *next_slot) return; // invalid position
+void insertValue(int *arr, int *next_slot) {
+    cout << "\n\nInserting Value" << endl;
+    int pos, val;
+    cout << "Enter value: ";
+    cin >> val;
+
+    do {
+        cout << "Enter position: ";
+        cin >> pos;
+        if (pos < 0 || pos > SIZE) cout << "Position out of bound" << endl;
+    } while(pos < 0 || pos > SIZE || pos > *next_slot);
 
     // insert at the next slot
     if(pos == *next_slot) {
@@ -68,8 +67,14 @@ void insertValue(int *arr, int pos, int val, int *next_slot) {
     (*next_slot)++;
 }
 
-void deleteValue(int *arr, int pos, int *next_slot) {
-    if (pos < 0 || pos >= *next_slot) return; // invalid position
+void deleteValue(int *arr, int *next_slot) {
+    cout << "\n\nDeleting Value" << endl;
+    int pos;
+    do {
+        cout << "Enter position: ";
+        cin >> pos;
+        if (pos < 0 || pos > SIZE) cout << "Position out of bound" << endl;
+    } while(pos < 0 || pos > SIZE || pos >= *next_slot);
 
     // Shift all elements left
     for (int i = pos; i < *next_slot - 1; i++) {
